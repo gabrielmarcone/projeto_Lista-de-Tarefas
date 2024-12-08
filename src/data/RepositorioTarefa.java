@@ -12,78 +12,116 @@ import java.util.ArrayList;
 import model.ITarefa;
 import model.Tarefa;
 
-public class RepositorioTarefa implements ITarefa {
+public class RepositorioTarefa  implements ITarefa {
     private String arquivo = "tarefa.ser";
 
-    @SuppressWarnings("unchecked")
     @Override
     public ArrayList<Tarefa> getAllTarefas() {
         ArrayList<Tarefa> tarefas = new ArrayList<>();
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(arquivo))) {
-            tarefas = (ArrayList<Tarefa>) ois.readObject();
+
+        try (FileInputStream fis = new FileInputStream(arquivo)) {
+            if (fis.available() > 0) {
+                ObjectInputStream ois = null;
+                try {
+                    while (fis.available() > 0) {
+                        ois = new ObjectInputStream(fis);
+                        Tarefa t = (Tarefa) ois.readObject();
+                        tarefas.add(t);
+                    }
+                } catch (ClassNotFoundException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
         } catch (FileNotFoundException ex) {
-            System.out.println("Arquivo não encontrado. Criando um novo.");
-            salvarTarefas(tarefas); // Cria o arquivo vazio
-        } catch (EOFException ex) {
+            // Arquivo não existe, cria vazio
+            try (FileOutputStream fos = new FileOutputStream(arquivo)) {
+                System.out.println("Arquivo criado vazio.");
+            } catch (IOException ioe) {
+                throw new RuntimeException("Erro ao criar arquivo vazio: " + ioe.getMessage());
+            }
+        } catch (EOFException e) {
+            // Arquivo está vazio, retorna lista vazia
             System.out.println("Arquivo vazio. Nenhuma tarefa carregada.");
-        } catch (IOException | ClassNotFoundException ex) {
-            System.out.println("Erro ao carregar tarefas: " + ex.getMessage());
+        } catch (IOException ex) {
+            System.out.println("Problema ao carregar o arquivo: " + ex.getMessage());
         }
         return tarefas;
     }
 
     @Override
     public void criarTarefa(Tarefa tarefa) {
-        ArrayList<Tarefa> tarefas = getAllTarefas();
-        tarefas.add(tarefa);
-        salvarTarefas(tarefas);
+        try (FileOutputStream fos = new FileOutputStream(arquivo, true)) {
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(tarefa);
+            oos.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Erro ao salvar a tarefa");
+        } catch (IOException ioe){
+            throw new RuntimeException("Erro ao salvar a tarefa");
+        }
     }
 
     @Override
     public Tarefa lerTarefa(String nome) {
-        ArrayList<Tarefa> tarefas = getAllTarefas();
-        for (Tarefa t : tarefas) {
+        ArrayList <Tarefa> tarefas = getAllTarefas();
+        Tarefa tarefa = null;
+        for (Tarefa t: tarefas) {
             if (t.getNome().equalsIgnoreCase(nome)) {
-                return t;
+                tarefa = t;
+                break;
             }
         }
-        return null;
+        return tarefa;
+    }
+
+    public void atualizarArquivoTarefa(ArrayList<Tarefa> tarefas) {
+        ObjectOutputStream oos = null;
+        try (FileOutputStream fos = new FileOutputStream(arquivo)) {
+            for (Tarefa t : tarefas) {
+                oos = new ObjectOutputStream(fos);
+                oos.writeObject(t);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Erro ao atualizar o arquivo: " + e.getMessage());
+        }
     }
 
     @Override
     public void atualizarTarefa(Tarefa tarefa) {
-        ArrayList<Tarefa> tarefas = getAllTarefas();
-        boolean tarefaAtualizada = false;
-
-        for (int i = 0; i < tarefas.size(); i++) {
-            if (tarefas.get(i).getId() == tarefa.getId()) {
-                tarefas.set(i, tarefa); // Substitui a tarefa existente
-                tarefaAtualizada = true;
-                break;
-            }
+        deletarTarefa(tarefa);
+        criarTarefa(tarefa);
+        /*ArrayList <Tarefa> tarefas;
+        boolean achou=false;
+        tarefas = (ArrayList<Tarefa>) getAllTarefas();
+        Tarefa t = lerTarefa(tarefa.getId());
+        for (int i=0; i < tarefas.size(); i++){
+             if (tarefa.getId() == tarefas.get(i).getId()){
+                 tarefas.remove(i);
+                 tarefas.add(tarefa);
+                 atualizarArquivoTarefa(tarefas);
+                 achou = true;
+                 break;
+             }
         }
-
-        if (!tarefaAtualizada) {
-            throw new RuntimeException("Tarefa não encontrada para atualização.");
-        }
-
-        salvarTarefas(tarefas); // Salva todas as tarefas no arquivo
+        if (!achou){
+             throw new RuntimeException("Tarefa não encontrada");
+        } */
     }
 
     @Override
     public void deletarTarefa(Tarefa tarefa) {
         ArrayList<Tarefa> tarefas = getAllTarefas();
-        if (!tarefas.removeIf(t -> t.getId() == tarefa.getId())) {
-            throw new RuntimeException("Tarefa não encontrada para exclusão.");
+        boolean removeu = false;
+        for (int i = 0; i < tarefas.size(); i++) {
+            if (tarefa.getId() == tarefas.get(i).getId()) {
+                tarefas.remove(i);
+                removeu = true;
+                break;
+            }
         }
-        salvarTarefas(tarefas); // Salva todas as tarefas restantes no arquivo
-    }
-
-    private void salvarTarefas(ArrayList<Tarefa> tarefas) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(arquivo))) {
-            oos.writeObject(tarefas);
-        } catch (IOException ex) {
-            throw new RuntimeException("Erro ao salvar tarefas: " + ex.getMessage());
+        if (!removeu) {
+            throw new RuntimeException("Tarefa não encontrada");
         }
+        atualizarArquivoTarefa(tarefas);
     }
 }
