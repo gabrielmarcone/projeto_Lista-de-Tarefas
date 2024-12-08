@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.image.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.telaInicialController">
+   <children>
+      <ImageView fitHeight="800.0" fitWidth="1044.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/icons/telaInicial_icon.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="buttonComecar" layoutX="345.0" layoutY="672.0" mnemonicParsing="false" onAction="#handleButtonComecar" style="-fx-background-radius: 15;" text="CLIQUE PARA COMEÇAR" textAlignment="CENTER" textFill="#1f3a57">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>

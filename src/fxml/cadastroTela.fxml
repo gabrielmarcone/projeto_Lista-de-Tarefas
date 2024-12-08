@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="532.0" prefWidth="497.0" style="-fx-background-color: #9EA8AE;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.cadastroTelaController">
+   <children>
+      <CheckBox fx:id="checkBoxImportante" layoutX="48.0" layoutY="405.0" mnemonicParsing="false" text="Marcar como Importante" textFill="#0e2f3f">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </CheckBox>
+      <Text fill="#0e2f3f" layoutX="48.0" layoutY="412.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Text>
+      <Button fx:id="buttonCancelarTarefa" layoutX="260.0" layoutY="465.0" mnemonicParsing="false" onAction="#handleButtonCancelarTarefa" style="-fx-background-color: D6DDDE;" text="CANCELAR" />
+      <Button fx:id="buttonSalvarTarefa" layoutX="165.0" layoutY="465.0" mnemonicParsing="false" onAction="#handleButtonSalvarTarefa" style="-fx-background-color: D6DDDE;" text="SALVAR" />
+      <Text fill="#0e2f3f" layoutX="48.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descrição">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Text>
+      <Text fill="#0e2f3f" layoutX="48.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categoria">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Text>
+      <Text fill="#0e2f3f" layoutX="48.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome da tarefa">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Text>
+      <TextField fx:id="textFieldDetalhes" layoutX="48.0" layoutY="286.0" prefHeight="81.0" prefWidth="422.0" style="-fx-background-color: D6DDDE;" text="Detalhes adicionais" />
+      <TextField fx:id="textFieldNomeTarefa" layoutX="48.0" layoutY="91.0" prefHeight="31.0" prefWidth="422.0" style="-fx-background-color: #D6DDDE;" text="Nome da tarefa" />
+      <MenuButton fx:id="menuButtonEscolherCategoria" layoutX="49.0" layoutY="191.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="422.0" style="-fx-background-color: D6DDDE;" text="Clique para selecionar">
+         <items>
+            <MenuItem fx:id="menuItemPessoal" mnemonicParsing="false" text="Pessoal" />
+            <MenuItem fx:id="menuItemEstudos" mnemonicParsing="false" text="Estudos" />
+            <MenuItem fx:id="menuItemTrabalho" mnemonicParsing="false" text="Trabalho" />
+            <MenuItem fx:id="menuItemSaude" mnemonicParsing="false" text="Saúde" />
+            <MenuItem fx:id="menuItemCompras" mnemonicParsing="false" text="Compras" />
+            <MenuItem fx:id="menuItemCasa" mnemonicParsing="false" text="Casa" />
+            <MenuItem fx:id="menuItemLazer" mnemonicParsing="false" text="Lazer" />
+         </items>
+      </MenuButton>
+      <Label fx:id="labelStatusSalvarTarefa" contentDisplay="CENTER" layoutX="58.0" layoutY="122.0" prefHeight="21.0" prefWidth="288.0" textFill="#d00808">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

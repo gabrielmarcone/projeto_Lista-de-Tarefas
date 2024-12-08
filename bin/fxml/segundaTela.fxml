@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #9EA8AE;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.segundaTelaController">
+   <children>
+      <AnchorPane layoutX="8.0" prefHeight="800.0" prefWidth="300.0" style="-fx-background-color: #0E2F3F;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="700.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Line endX="125.0" layoutX="154.0" layoutY="704.0" startX="-132.0" stroke="#aba4a4" />
+            <Button fx:id="buttonAdicionarTarefa" layoutX="48.0" layoutY="729.0" mnemonicParsing="false" onAction="#handleButtonAdicionarTarefa" style="-fx-background-color: #2f5d75; -fx-background-radius: 15;" text="+ Adicionar Tarefa" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+            <TextField fx:id="textFieldBuscarTarefa" layoutX="46.0" layoutY="53.0" prefHeight="37.0" prefWidth="184.0" style="-fx-background-radius: 5;" text="Buscar tarefa">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <Button fx:id="buttonBuscarTarefa" layoutX="240.0" layoutY="53.0" mnemonicParsing="false" onAction="#handleButtonBuscarTarefa" prefHeight="37.0" prefWidth="41.0" style="-fx-background-color: #2f5d75; -fx-background-radius: 20;" text="🔎" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+      <Button fx:id="buttonTarefasPendentes" alignment="TOP_LEFT" layoutX="47.0" layoutY="648.0" mnemonicParsing="false" onAction="#handleButtonTarefasNaoRealizadas" prefHeight="31.0" prefWidth="216.0" style="-fx-background-color: ebf1f5; -fx-background-radius: 5;" text="Tarefas não realizadas" />
+      <Button fx:id="buttonTarefasRealizadas" alignment="TOP_LEFT" layoutX="47.0" layoutY="596.0" mnemonicParsing="false" onAction="#handleButtonTarefasRealizadas" prefHeight="31.0" prefWidth="216.0" style="-fx-background-color: ebf1f5; -fx-background-radius: 5;" text="Tarefas realizadas" />
+      <Line endX="125.0" layoutX="160.0" layoutY="570.0" startX="-132.0" stroke="#aba4a4" />
+      <Button fx:id="buttonLazer" alignment="TOP_LEFT" layoutX="47.0" layoutY="510.0" mnemonicParsing="false" onAction="#handleButtonCategoria" prefHeight="31.0" prefWidth="216.0" style="-fx-background-color: ebf1f5; -fx-background-radius: 5;" text="Lazer" />
+      <Button fx:id="buttonCasa" alignment="TOP_LEFT" layoutX="47.0" layoutY="457.0" mnemonicParsing="false" onAction="#handleButtonCategoria" prefHeight="31.0" prefWidth="216.0" style="-fx-background-color: ebf1f5; -fx-background-radius: 5;" text="Casa" />
+      <Button fx:id="buttonCompras" alignment="TOP_LEFT" layoutX="47.0" layoutY="404.0" mnemonicParsing="false" onAction="#handleButtonCategoria" prefHeight="31.0" prefWidth="216.0" style="-fx-background-color: ebf1f5; -fx-background-radius: 5;" text="Compras" />
+      <Button fx:id="buttonImportante" layoutX="47.0" layoutY="111.0" mnemonicParsing="false" onAction="#handleButtonCategoria" style="-fx-background-color: #2f5d75;" text="★ Importante" textFill="WHITE" />
+      <Button fx:id="buttonSaude" alignment="TOP_LEFT" layoutX="47.0" layoutY="349.0" mnemonicParsing="false" onAction="#handleButtonCategoria" prefHeight="31.0" prefWidth="216.0" style="-fx-background-color: ebf1f5; -fx-background-radius: 5;" text="Saúde" />
+      <Button fx:id="buttonTrabalho" alignment="TOP_LEFT" layoutX="47.0" layoutY="296.0" mnemonicParsing="false" onAction="#handleButtonCategoria" prefHeight="31.0" prefWidth="216.0" style="-fx-background-color: ebf1f5; -fx-background-radius: 5;" text="Trabalho" />
+      <Button fx:id="buttonEstudos" alignment="TOP_LEFT" layoutX="47.0" layoutY="243.0" mnemonicParsing="false" onAction="#handleButtonCategoria" prefHeight="31.0" prefWidth="216.0" style="-fx-background-color: ebf1f5; -fx-background-radius: 5;" text="Estudos" />
+      <Button fx:id="buttonPessoal" alignment="TOP_LEFT" layoutX="47.0" layoutY="191.0" mnemonicParsing="false" onAction="#handleButtonCategoria" prefHeight="31.0" prefWidth="216.0" style="-fx-background-color: #ebf1f5; -fx-background-radius: 5;" text="Pessoal" />
+      <Text layoutX="59.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Line endX="125.0" layoutX="158.0" layoutY="166.0" startX="-132.0" stroke="#aba4a4" />
+      <ScrollPane layoutX="300.0" prefHeight="800.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <VBox fx:id="VBoxListaDeTarefas" prefWidth="680.0" />
+      </ScrollPane>
+   </children>
+</AnchorPane>
