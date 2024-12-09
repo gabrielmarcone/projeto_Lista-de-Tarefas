@@ -72,27 +72,38 @@ public class segundaTelaController implements Initializable {
         textFieldBuscarTarefa.clear();
     }
     
-    // Carregar as tarefas salvas no repositório e gerar os containers estilizados
-    private void carregarTarefas() {
-        VBoxListaDeTarefas.getChildren().clear(); // Limpar a interface antes de atualizar
-        ArrayList<Tarefa> tarefas = repositorioTarefa.getAllTarefas();
+    // Carregar as tarefas com filtro opcional
+private void carregarTarefas() {
+    carregarTarefasComFiltro(filtroAtual);
+}
 
-        if (tarefas == null || tarefas.isEmpty()) {
-            System.out.println("Nenhuma tarefa encontrada.");
-            return; // Não tenta carregar se a lista está vazia
-        }
+private void carregarTarefasComFiltro(String filtro) {
+    VBoxListaDeTarefas.getChildren().clear(); // Limpar a interface antes de atualizar
+    ArrayList<Tarefa> tarefas = repositorioTarefa.getAllTarefas();
 
-        // Adicionar tarefas não concluídas primeiro
-        tarefas.stream()
-            .filter(tarefa -> !tarefa.isFinalizada())
-            .forEach(tarefa -> VBoxListaDeTarefas.getChildren().add(criarContainerTarefa(tarefa)));
-    
-        // Adicionar tarefas concluídas depois
-        tarefas.stream()
-            .filter(Tarefa::isFinalizada)
-            .forEach(tarefa -> VBoxListaDeTarefas.getChildren().add(criarContainerTarefa(tarefa)));
-        
+    if (tarefas == null || tarefas.isEmpty()) {
+        System.out.println("Nenhuma tarefa encontrada.");
+        return; // Não tenta carregar se a lista está vazia
     }
+
+    // Filtra e organiza as tarefas com base no filtro atual
+    tarefas.stream()
+        .filter(tarefa -> pertenceAoFiltro(tarefa, filtro, false))
+        .forEach(tarefa -> VBoxListaDeTarefas.getChildren().add(criarContainerTarefa(tarefa)));
+
+    tarefas.stream()
+        .filter(tarefa -> pertenceAoFiltro(tarefa, filtro, true))
+        .forEach(tarefa -> VBoxListaDeTarefas.getChildren().add(criarContainerTarefa(tarefa)));
+}
+
+// Verifica se a tarefa pertence ao filtro (não concluída ou concluída)
+private boolean pertenceAoFiltro(Tarefa tarefa, String filtro, boolean isFinalizada) {
+    return (filtro.isEmpty() || filtro.equals(tarefa.getCategoria()) || 
+            (filtro.equals("Pendentes") && !tarefa.isFinalizada()) || 
+            (filtro.equals("Realizadas") && tarefa.isFinalizada()) ||
+            (filtro.equals("Importante") && tarefa.isImportante())) &&
+           (tarefa.isFinalizada() == isFinalizada);
+}
 
     private void inicializarBotoes() {
         botoesCategoria.add(buttonLazer);
@@ -214,10 +225,10 @@ public class segundaTelaController implements Initializable {
                 e.printStackTrace();
             } 
         }
-        // Atualizar tarefa
+        //Atualizar tarefa
         tarefa.setFinalizada(checkConcluir.isSelected());
         repositorioTarefa.atualizarTarefa(tarefa);
-        carregarTarefas();
+        carregarTarefasComFiltro(filtroAtual); // Respeita o filtro atual ao recarregar
     });
 
     

@@ -54,6 +54,7 @@ public class cadastroTelaController implements Initializable {
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
 
+        dialogStage.setResizable(false);
         dialogStage.getScene().setOnKeyPressed(event -> {
         if (event.getCode() == KeyCode.ENTER) {
             handleButtonSalvarTarefa(new ActionEvent());
