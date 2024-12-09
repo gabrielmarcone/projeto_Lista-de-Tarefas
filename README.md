@@ -16,6 +16,7 @@ O aplicativo de lista de tarefas é uma solução prática e visualmente atraent
 ## 1. Tela Inicial:
 •	O usuário pode iniciar o app clicando no botão "Clique para começar". Após a abertura, ele é direcionado para a tela principal com a lista de tarefas.
 
+> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
 ## 2. Tela Principal:
 •	Na tela principal, o usuário pode visualizar suas categorias e todas as tarefas listadas. Para iniciar a busca de uma tarefa, basta clicar na barra de pesquisa. Ademais, ele tem a opção de selecionar e navegar entre as categorias existentes e na realização de tarefas.
 
@@ -37,7 +38,7 @@ O aplicativo de lista de tarefas é uma solução prática e visualmente atraent
 ## 8. Editando uma Tarefa
 •	O usuário pode editar uma tarefa clicando no botão “Editar” no container da tarefa. Isso permitirá a alteração de detalhes, como o nome ou a categoria da tarefa. Após realizar as modificações, ele deverá confirmar as mudanças pressionando o botão "Salvar".
 
-# ✔ Licença
+# ✔️ Licença
 
 O JavaFX está disponível sob a licença GPLv2 com Classpath Exception, e o SceneBuilder é distribuído sob a licença BSD-3-Clause. 
 
@@ -46,4 +47,4 @@ O JavaFX está disponível sob a licença GPLv2 com Classpath Exception, e o Sce
 - [Carolina de Moraes Carneiro](https://github.com/carolinamor4es)
 - [Cibelly Henrique Nogueira Batista](https://github.com/cibellyhnb)
 - [Gabriel Marcone Magalhães Santos](https://github.com/gabrielmarcone)
-- [João Guilherme Oliveira Souza](httos://github.com/jgssbeats)
+- [João Guilherme Oliveira Souza](https://github.com/jgssbeats)
