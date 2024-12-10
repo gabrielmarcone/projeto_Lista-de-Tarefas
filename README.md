@@ -46,4 +46,4 @@ O JavaFX está disponível sob a licença GPLv2 com Classpath Exception, e o Sce
 - [Carolina de Moraes Carneiro](https://github.com/carolinamor4es)
 - [Cibelly Henrique Nogueira Batista](https://github.com/cibellyhnb)
 - [Gabriel Marcone Magalhães Santos](https://github.com/gabrielmarcone)
-- [João Guilherme Oliveira Souza](httos://github.com/jgssbeats)
+- [João Guilherme Oliveira Souza](https://github.com/jgssbeats)
